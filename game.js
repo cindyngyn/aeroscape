@@ -433,28 +433,41 @@ function drawMenu() {
   ctx.fillStyle = "rgba(230, 244, 255, 0.9)";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  const logoWidth = 600;
-  const logoHeight = (logoImage.height / logoImage.width) * logoWidth;
-  const floatOffset = Math.sin(logoFloatTime) * 10;
+  const uiScale = getUIScale();
+
+  // Logo
+  const maxLogoWidth = canvas.width * 0.6;
+  const maxLogoHeight = canvas.height * 0.25;
+  let logoWidth = logoImage.width * uiScale;
+  let logoHeight = logoImage.height * uiScale;
+
+  if (logoWidth > maxLogoWidth) {
+    const ratio = maxLogoWidth / logoWidth;
+    logoWidth *= ratio;
+    logoHeight *= ratio;
+  }
+  if (logoHeight > maxLogoHeight) {
+    const ratio = maxLogoHeight / logoHeight;
+    logoWidth *= ratio;
+    logoHeight *= ratio;
+  }
+
+  const floatOffset = Math.sin(logoFloatTime) * 10 * uiScale;
   const logoX = canvas.width / 2 - logoWidth / 2;
-  const logoY = 18 + floatOffset;
+  const logoY = 20 * uiScale + floatOffset;
 
   ctx.save();
   ctx.globalAlpha = logoFade;
   ctx.drawImage(logoImage, logoX, logoY, logoWidth, logoHeight);
   ctx.restore();
 
-  const uiScale = getUIScale();
-  
+  // "Select Your Character" text
   ctx.fillStyle = "#1db8c7";
   ctx.font = `${20 * uiScale}px 'Press Start 2P'`;
   ctx.textAlign = "center";
-  ctx.fillText(
-  "Select Your Character",
-  canvas.width / 2,
-  canvas.height * 0.33
-);
+  ctx.fillText("Select Your Character", canvas.width / 2, canvas.height * 0.33);
 
+  // Characters
   const CHARACTER_HOVER_SCALE = 1.06;
   menuCharacters.forEach(c => {
     const isHover =
@@ -473,34 +486,34 @@ function drawMenu() {
     ctx.restore();
   });
 
+  // Audio UI
   drawAudioUI();
 
-// Controls text
+  // Controls text
+  ctx.save();
+  ctx.font = `${14 * uiScale}px 'Press Start 2P'`;
+  ctx.fillStyle = "#1db8c7";
+  ctx.textAlign = "right";
+  ctx.fillText("Controls: WASD to move", canvas.width - 18 * uiScale, 35 * uiScale);
+  ctx.restore();
 
-ctx.save();
-ctx.font = `${14 * uiScale}px 'Press Start 2P'`;
-ctx.fillStyle = "#1db8c7";
-ctx.textAlign = "right";
-ctx.fillText(
-  "Controls: WASD to move",
-  canvas.width - 18 * uiScale,
-  35 * uiScale
-);
-
+  // Footer
   footerFade = Math.min(1, footerFade + 0.02);
   ctx.save();
   ctx.globalAlpha = footerFade;
-  ctx.font = `${10 * getUIScale()}px 'Press Start 2P'`;
+  ctx.font = `${10 * uiScale}px 'Press Start 2P'`;
   ctx.fillStyle = "#1db8c7";
   ctx.textAlign = "left";
-  ctx.fillText(footerText, 20, canvas.height - 16 * getUIScale());
+  ctx.fillText(footerText, 20, canvas.height - 16 * uiScale);
   ctx.restore();
 
+  // Transition overlay
   if (gameState === "transition") {
     ctx.fillStyle = `rgba(0,0,0,${transitionAlpha})`;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
   }
 }
+
 // Draw Game
 function drawGame() {
   ctx.setTransform(1, 0, 0, 1, 0, 0);
