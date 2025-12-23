@@ -38,16 +38,16 @@ const audioOffIcon = new Image();
 audioOffIcon.src = "audio_off.png";
 
 const mapImage = new Image();
-mapImage.src = "lobby.png";
+mapImage.src = "Lobby.png";
 
 const treeTopImage = new Image();
 treeTopImage.src = "tree_top.png";
 
 const plantImage = new Image();
-plantImage.src = "plant.png";
+plantImage.src = "Plant.png";
 
 const logoImage = new Image();
-logoImage.src = "aeroscape_logo.png";
+logoImage.src = "Aeroscape_Logo.png";
 
 const helperBotDialogue = new Image();
 helperBotDialogue.src = "HelperBot_Dialogue.png";
@@ -539,3 +539,4 @@ function loop() {
   else drawGame();
   requestAnimationFrame(loop);
 }
+
