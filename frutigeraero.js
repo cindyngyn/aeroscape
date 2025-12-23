@@ -21,9 +21,11 @@ const PLAYER_SCALE = 0.27;
 const ORIGINAL_SIZE = 2500;
 const PLAYER_SIZE = ORIGINAL_SIZE * PLAYER_SCALE;
 
+const PLAYER_Y_OFFSET = 55;
+
 const player = {
   x: PLAYER_SIZE / 2,
-  y: MAP_HEIGHT - PLAYER_SIZE * 0.45, 
+  y: MAP_HEIGHT - PLAYER_SIZE * 0.45 - PLAYER_Y_OFFSET,
   speed: 2.5,
   walkTime: 0,
   facing: "right",
@@ -239,17 +241,19 @@ ctx.drawImage(
   mist.height * worldScale
 );
 
-  // Draw player
-  const hop = Math.sin(player.walkTime) * 10 * worldScale;
+// Draw player
+const hop = Math.sin(player.walkTime) * 10;
 
 const scaledPlayerSize = PLAYER_SIZE * worldScale;
-const playerX = player.x * worldScale - scaledPlayerSize / 2;
-const PLAYER_Y_OFFSET = 325;
 
+const playerX = player.x * worldScale - scaledPlayerSize / 2;
 const playerY =
-  player.y - PLAYER_SIZE / 2 - hop - PLAYER_Y_OFFSET;
+  player.y * worldScale -
+  scaledPlayerSize / 2 -
+  hop * worldScale;
 
 ctx.save();
+
 if (player.facing === "left") {
   ctx.translate(playerX + scaledPlayerSize / 2, 0);
   ctx.scale(-1, 1);
@@ -269,6 +273,7 @@ if (player.facing === "left") {
     scaledPlayerSize
   );
 }
+
 ctx.restore();
 
 
