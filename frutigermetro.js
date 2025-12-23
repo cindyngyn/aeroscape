@@ -30,14 +30,14 @@ const player = {
 const playerSprite = new Image();
 
 // Fallback
-const savedSprite = localStorage.getItem("selectedPlayerSprite") || "Player_1.png";
+const savedSprite = localStorage.getItem("selectedPlayerSprite") || "Player_1.";
 
 playerSprite.src = savedSprite;
 player.img = playerSprite;
 
 // Background
 const bgImage = new Image();
-bgImage.src = "FrutigerMetro.PNG";
+bgImage.src = "FrutigerMetro.";
 
 // Input
 const keys = {};
@@ -56,10 +56,10 @@ bgMusic.loop = true;
 bgMusic.volume = 0.6;
 
 const audioOnIcon = new Image();
-audioOnIcon.src = "audio_on_white.png";
+audioOnIcon.src = "audio_on_white.";
 
 const audioOffIcon = new Image();
-audioOffIcon.src = "audio_off_white.png";
+audioOffIcon.src = "audio_off_white.";
 
 let audioStarted = false;
 function startAudioIfNotStarted() {
@@ -102,7 +102,7 @@ const metroBot = {
   height: CHARACTER_SIZE * METROBOT_SCALE,
   img: new Image()
 };
-metroBot.img.src = "MetroBot.PNG";
+metroBot.img.src = "MetroBot.";
 
 const melody = {
   x: 3379,
@@ -111,14 +111,14 @@ const melody = {
   height: CHARACTER_SIZE * MELODY_SCALE,
   img: new Image()
 };
-melody.img.src = "Melody.PNG";
+melody.img.src = "Melody.";
 
 // Dialogue images
 const metroBotDialogue = new Image();
-metroBotDialogue.src = "MetroBot_Dialogue.PNG";
+metroBotDialogue.src = "MetroBot_Dialogue.";
 
 const melodyDialogue = new Image();
-melodyDialogue.src = "Melody_Dialogue.PNG";
+melodyDialogue.src = "Melody_Dialogue.";
 
 // Dialogue flags
 let showMetroBotDialogue = false;
@@ -246,4 +246,5 @@ function loop() {
   draw();
   requestAnimationFrame(loop);
 }
+
 loop();
