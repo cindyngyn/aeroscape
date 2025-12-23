@@ -41,7 +41,7 @@ player.img = playerSprite;
 
 // Background
 const bgImage = new Image();
-bgImage.src = "FrutigerAero.PNG";
+bgImage.src = "FrutigerAero.png";
 
 // Input
 const keys = {};
@@ -105,7 +105,7 @@ const aeroBot = {
   height: CHARACTER_SIZE * AEROBOT_SCALE,
   img: new Image()
 };
-aeroBot.img.src = "AeroBot.PNG";
+aeroBot.img.src = "AeroBot.png";
 
 const mist = {
   x: 6175,
@@ -114,13 +114,13 @@ const mist = {
   height: CHARACTER_SIZE * MIST_SCALE,
   img: new Image()
 };
-mist.img.src = "Mist.PNG";
+mist.img.src = "Mist.png";
 
 // Dialogue images
 const aeroBotDialogue = new Image();
-aeroBotDialogue.src = "AeroBot_Dialogue.PNG";
+aeroBotDialogue.src = "AeroBot_Dialogue.png";
 const mistDialogue = new Image();
-mistDialogue.src = "Mist_Dialogue.PNG";
+mistDialogue.src = "Mist_Dialogue.png";
 
 // Dialogue flags
 let showAeroBotDialogue = false;
@@ -297,4 +297,5 @@ function loop() {
   draw();
   requestAnimationFrame(loop);
 }
+
 loop();
