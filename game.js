@@ -194,11 +194,12 @@ function buildCharacterGrid() {
 
   const uiScale = getUIScale();
 
-const logoWidth = Math.min(600 * uiScale, canvas.width * 0.8);
+const logoWidth = Math.min(600 * uiScale, canvas.width * 0.75);
 const logoHeight = (logoImage.height / logoImage.width) * logoWidth;
+
 const floatOffset = Math.sin(logoFloatTime) * (10 * uiScale);
 
-const logoX = canvas.width / 2 - logoWidth / 2;
+const logoX = (canvas.width - logoWidth) / 2;
 const logoY = 20 * uiScale + floatOffset;
 
   const cols = 3;
