@@ -88,8 +88,13 @@ const ASSETS_TO_LOAD =
 function assetLoaded() {
   assetsLoaded++;
   if (assetsLoaded === ASSETS_TO_LOAD) {
+    buildCharacterGrid();
     requestAnimationFrame(loop);
   }
+}
+
+function getUIScale() {
+  return Math.min(canvas.width / 1440, canvas.height / 900, 1);
 }
 
 menuBackground.onload = assetLoaded;
@@ -127,6 +132,12 @@ const player = {
 const keys = {};
 window.addEventListener("keydown", e => { keys[e.key.toLowerCase()] = true; });
 window.addEventListener("keyup", e => { keys[e.key.toLowerCase()] = false; });
+
+window.addEventListener("resize", () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  buildCharacterGrid();
+});
 
 // Collisions
 const collisions = [
@@ -180,16 +191,31 @@ const menuCharacters = [];
 
 function buildCharacterGrid() {
   menuCharacters.length = 0;
+
+  const uiScale = getUIScale();
+
+const logoWidth = Math.min(600 * uiScale, canvas.width * 0.8);
+const logoHeight = (logoImage.height / logoImage.width) * logoWidth;
+const floatOffset = Math.sin(logoFloatTime) * (10 * uiScale);
+
+const logoX = canvas.width / 2 - logoWidth / 2;
+const logoY = 20 * uiScale + floatOffset;
+
   const cols = 3;
   const rows = 2;
-  const size = 200;
-  const spacing = 40;
+
+  const size = 200 * uiScale;
+  const spacing = 40 * uiScale;
+
   const totalWidth = cols * size + (cols - 1) * spacing;
   const startX = canvas.width / 2 - totalWidth / 2;
-  const startY = canvas.height / 2 - 65;
+  const startY = canvas.height * 0.45;
+
   let index = 0;
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < cols; c++) {
+      if (index >= playerSprites.length) return;
+
       menuCharacters.push({
         img: playerSprites[index],
         x: startX + c * (size + spacing),
@@ -197,11 +223,11 @@ function buildCharacterGrid() {
         size,
         index
       });
+
       index++;
     }
   }
 }
-buildCharacterGrid();
 
 // Audio Click Handling
 canvas.addEventListener("click", () => {
@@ -274,16 +300,34 @@ canvas.addEventListener("click", e => {
 function drawAudioUI() {
   ctx.setTransform(1, 0, 0, 1, 0, 0);
 
+  const uiScale = getUIScale();
+  const size = AUDIO_ICON_SIZE * uiScale;
+
+  ctx.drawImage(
+    audioEnabled ? audioOnIcon : audioOffIcon,
+    AUDIO_ICON_X * uiScale,
+    AUDIO_ICON_Y * uiScale,
+    size,
+    size
+  );
+
+  if (audioEnabled) {
+    ctx.font = `${12 * uiScale}px 'Press Start 2P'`;
+    ctx.fillStyle = "#1db8c7";
+    ctx.textAlign = "left";
+    ctx.fillText(
+      SONG_TITLE,
+      AUDIO_ICON_X * uiScale + size + 10 * uiScale,
+      AUDIO_ICON_Y * uiScale + size * 0.85
+    );
+  }
+}
+
   const icon = audioEnabled ? audioOnIcon : audioOffIcon;
   ctx.drawImage(icon, AUDIO_ICON_X, AUDIO_ICON_Y, AUDIO_ICON_SIZE, AUDIO_ICON_SIZE);
 
-  if (audioEnabled) {
-    ctx.font = "14px 'Press Start 2P'";
-    ctx.fillStyle = "#1db8c7";
-    ctx.textAlign = "left";
-    ctx.fillText(SONG_TITLE, AUDIO_ICON_X + 40, AUDIO_ICON_Y + 18);
-  }
-}
+  if (audioEnabled) {}
+
 
 // Clover settings
 const CLOVER_SCALE = 0.3;
@@ -438,10 +482,10 @@ ctx.restore();
   footerFade = Math.min(1, footerFade + 0.02);
   ctx.save();
   ctx.globalAlpha = footerFade;
-  ctx.font = "11px 'Press Start 2P'";
+  ctx.font = `${10 * getUIScale()}px 'Press Start 2P'`;
   ctx.fillStyle = "#1db8c7";
   ctx.textAlign = "left";
-  ctx.fillText(footerText, 20, canvas.height - 20);
+  ctx.fillText(footerText, 20, canvas.height - 16 * getUIScale());
   ctx.restore();
 
   if (gameState === "transition") {
@@ -539,8 +583,3 @@ function loop() {
   else drawGame();
   requestAnimationFrame(loop);
 }
-
-
-
-
-
