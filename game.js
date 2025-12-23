@@ -443,10 +443,16 @@ function drawMenu() {
   ctx.drawImage(logoImage, logoX, logoY, logoWidth, logoHeight);
   ctx.restore();
 
+  const uiScale = getUIScale();
+  
   ctx.fillStyle = "#1db8c7";
-  ctx.font = "20px 'Press Start 2P'";
+  ctx.font = `${20 * uiScale}px 'Press Start 2P'`;
   ctx.textAlign = "center";
-  ctx.fillText("Select Your Character", canvas.width / 2, 330);
+  ctx.fillText(
+  "Select Your Character",
+  canvas.width / 2,
+  canvas.height * 0.33
+);
 
   const CHARACTER_HOVER_SCALE = 1.06;
   menuCharacters.forEach(c => {
@@ -469,15 +475,16 @@ function drawMenu() {
   drawAudioUI();
 
 // Controls text
+
 ctx.save();
-ctx.font = "14px 'Press Start 2P'";
+ctx.font = `${14 * uiScale}px 'Press Start 2P'`;
 ctx.fillStyle = "#1db8c7";
 ctx.textAlign = "right";
 ctx.fillText(
   "Controls: WASD to move",
-  canvas.width - 18, 35
+  canvas.width - 18 * uiScale,
+  35 * uiScale
 );
-ctx.restore();
 
   footerFade = Math.min(1, footerFade + 0.02);
   ctx.save();
