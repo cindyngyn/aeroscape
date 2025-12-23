@@ -200,7 +200,7 @@ function draw() {
   const worldScale = getWorldScale();
   const viewW = canvas.width / worldScale;
 
-  // Camera
+// Camera
   let camX = player.x - viewW / 2;
   camX = Math.max(0, Math.min(MAP_WIDTH - viewW, camX));
 
@@ -211,14 +211,14 @@ function draw() {
     0
   );
 
-  // 🌆 Background
+// Draw background
   ctx.drawImage(bgImage, 0, 0, MAP_WIDTH, MAP_HEIGHT);
 
-  // 🤖 NPCs
+// Draw NPCs
   ctx.drawImage(metroBot.img, metroBot.x, metroBot.y, metroBot.width, metroBot.height);
   ctx.drawImage(melody.img, melody.x, melody.y, melody.width, melody.height);
 
-  // 🧍 Player
+// Draw player
   const hop = Math.sin(player.walkTime) * 10;
   const playerX = player.x - PLAYER_SIZE / 2;
   const playerY = player.y - PLAYER_SIZE / 2 - hop;
@@ -245,10 +245,10 @@ function draw() {
   }
   ctx.restore();
 
-  // 🔊 UI (screen space)
+// Draw Audio UI
   drawAudioUI();
 
-  // 💬 Dialogue (screen space)
+// Dialogues
   if (showMetroBotDialogue && metroBotDialogue.complete) {
     ctx.setTransform(1,0,0,1,0,0);
     const dw = canvas.width;
@@ -272,3 +272,4 @@ function loop() {
 }
 
 loop();
+
