@@ -53,13 +53,13 @@ const helperBotDialogue = new Image();
 helperBotDialogue.src = "HelperBot_Dialogue.png";
 
 const cloverImage = new Image();
-cloverImage.src = "Clover.PNG";
+cloverImage.src = "Clover.png";
 
 const cloverDialogue = new Image();
-cloverDialogue.src = "Clover_Dialogue.PNG";
+cloverDialogue.src = "Clover_Dialogue.png";
 
 const lockedDoorDialogue = new Image();
-lockedDoorDialogue.src = "LockedDoor.PNG";
+lockedDoorDialogue.src = "LockedDoor.png";
 
 const playerSprites = [];
 for (let i = 1; i <= 6; i++) {
@@ -539,6 +539,7 @@ function loop() {
   else drawGame();
   requestAnimationFrame(loop);
 }
+
 
 
 
