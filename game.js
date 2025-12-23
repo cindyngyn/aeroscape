@@ -25,41 +25,41 @@ const SONG_TITLE = "alyzea - home menu";
 
 // Assets
 const menuBackground = new Image();
-menuBackground.src = "cindyngyn.github.io/aeroscape/LoadingScreen_FrutigerAero.png";
+menuBackground.src = "LoadingScreen_FrutigerAero.png";
 
-const bgMusic = new Audio("cindyngyn.github.io/aeroscape/alyzea_home_menu.mp3");
+const bgMusic = new Audio("alyzea_home_menu.mp3");
 bgMusic.loop = true;
 bgMusic.volume = 0.6;
 
 const audioOnIcon = new Image();
-audioOnIcon.src = "cindyngyn.github.io/aeroscape/audio_on.png";
+audioOnIcon.src = "audio_on.png";
 
 const audioOffIcon = new Image();
-audioOffIcon.src = "cindyngyn.github.io/aeroscape/audio_off.png";
+audioOffIcon.src = "audio_off.png";
 
 const mapImage = new Image();
-mapImage.src = "cindyngyn.github.io/aeroscape/Lobby.png";
+mapImage.src = "Lobby.png";
 
 const treeTopImage = new Image();
-treeTopImage.src = "cindyngyn.github.io/aeroscape/tree_top.png";
+treeTopImage.src = "tree_top.png";
 
 const plantImage = new Image();
-plantImage.src = "cindyngyn.github.io/aeroscape/Plant.png";
+plantImage.src = "Plant.png";
 
 const logoImage = new Image();
-logoImage.src = "cindyngyn.github.io/aeroscape/Aeroscape_Logo.png";
+logoImage.src = "Aeroscape_Logo.png";
 
 const helperBotDialogue = new Image();
-helperBotDialogue.src = "cindyngyn.github.io/aeroscape/HelperBot_Dialogue.png";
+helperBotDialogue.src = "HelperBot_Dialogue.png";
 
 const cloverImage = new Image();
-cloverImage.src = "cindyngyn.github.io/aeroscape/Clover.PNG";
+cloverImage.src = "Clover.PNG";
 
 const cloverDialogue = new Image();
-cloverDialogue.src = "cindyngyn.github.io/aeroscape/Clover_Dialogue.PNG";
+cloverDialogue.src = "Clover_Dialogue.PNG";
 
 const lockedDoorDialogue = new Image();
-lockedDoorDialogue.src = "cindyngyn.github.io/aeroscape/LockedDoor.PNG";
+lockedDoorDialogue.src = "LockedDoor.PNG";
 
 const playerSprites = [];
 for (let i = 1; i <= 6; i++) {
@@ -539,5 +539,6 @@ function loop() {
   else drawGame();
   requestAnimationFrame(loop);
 }
+
 
 
