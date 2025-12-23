@@ -12,6 +12,10 @@ const MAP_WIDTH = 9600;
 const MAP_HEIGHT = 960; 
 const CAMERA_ZOOM = 1;  
 
+function getWorldScale() {
+  return canvas.height / MAP_HEIGHT;
+}
+
 // Player settings
 const PLAYER_SCALE = 0.18;  
 const ORIGINAL_SIZE = 2500; 
@@ -193,37 +197,58 @@ function draw() {
   ctx.setTransform(1,0,0,1,0,0);
   ctx.clearRect(0,0,canvas.width,canvas.height);
 
+  const worldScale = getWorldScale();
+  const viewW = canvas.width / worldScale;
+
   // Camera
-  const viewW = canvas.width;
   let camX = player.x - viewW / 2;
   camX = Math.max(0, Math.min(MAP_WIDTH - viewW, camX));
-  ctx.setTransform(1,0,0,1,-camX,0);
 
-  // Draw background
-  ctx.drawImage(bgImage, 0,0, MAP_WIDTH, MAP_HEIGHT);
+  ctx.setTransform(
+    worldScale, 0,
+    0, worldScale,
+    -camX * worldScale,
+    0
+  );
 
-  // Draw NPCs
+  // 🌆 Background
+  ctx.drawImage(bgImage, 0, 0, MAP_WIDTH, MAP_HEIGHT);
+
+  // 🤖 NPCs
   ctx.drawImage(metroBot.img, metroBot.x, metroBot.y, metroBot.width, metroBot.height);
   ctx.drawImage(melody.img, melody.x, melody.y, melody.width, melody.height);
 
-  // Draw player
+  // 🧍 Player
   const hop = Math.sin(player.walkTime) * 10;
   const playerX = player.x - PLAYER_SIZE / 2;
   const playerY = player.y - PLAYER_SIZE / 2 - hop;
 
   ctx.save();
   if (player.facing === "left") {
-    ctx.translate(playerX + PLAYER_SIZE/2,0);
-    ctx.scale(-1,1);
-    ctx.drawImage(player.img, -PLAYER_SIZE/2, playerY, PLAYER_SIZE, PLAYER_SIZE);
+    ctx.translate(playerX + PLAYER_SIZE / 2, 0);
+    ctx.scale(-1, 1);
+    ctx.drawImage(
+      player.img,
+      -PLAYER_SIZE / 2,
+      playerY,
+      PLAYER_SIZE,
+      PLAYER_SIZE
+    );
   } else {
-    ctx.drawImage(player.img, playerX, playerY, PLAYER_SIZE, PLAYER_SIZE);
+    ctx.drawImage(
+      player.img,
+      playerX,
+      playerY,
+      PLAYER_SIZE,
+      PLAYER_SIZE
+    );
   }
   ctx.restore();
 
+  // 🔊 UI (screen space)
   drawAudioUI();
 
-  // Dialogue
+  // 💬 Dialogue (screen space)
   if (showMetroBotDialogue && metroBotDialogue.complete) {
     ctx.setTransform(1,0,0,1,0,0);
     const dw = canvas.width;
@@ -239,7 +264,6 @@ function draw() {
   }
 }
 
-
 // Loop
 function loop() {
   update();
@@ -248,4 +272,3 @@ function loop() {
 }
 
 loop();
-
