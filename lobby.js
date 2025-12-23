@@ -52,10 +52,10 @@ const cloverImage = new Image();
 cloverImage.src = "Clover.PNG";
 
 const cloverDialogue = new Image();
-cloverDialogue.src = "Clover_Dialogue_2.PNG";
+cloverDialogue.src = "Clover_Dialogue_2.png";
 
 const lockedDoorDialogue = new Image();
-lockedDoorDialogue.src = "LockedDoor.PNG";
+lockedDoorDialogue.src = "LockedDoor.png";
 
 const playerSprites = [];
 for (let i = 1; i <= 6; i++) {
@@ -154,8 +154,8 @@ function getPlayerHitbox(x, y) {
 
 // Locked Door Areas
 const lockedDoorAreas = [
-  { x: 325,  y: 1100, width: 275, height: 450 }, // orange
-  { x: 1498, y: 200,  width: 375, height: 525 } // green
+  { x: 325,  y: 1100, width: 275, height: 450 }, // orange door
+  { x: 1498, y: 200,  width: 375, height: 525 } // green door
 ];
 
 let showLockedDoorDialogue = false;
@@ -339,5 +339,6 @@ function loop() {
   drawGame();
   requestAnimationFrame(loop);
 }
+
 
 loop();
