@@ -111,7 +111,7 @@ const CAMERA_ZOOM = 0.65;
 const player = {
   x: 4200,
   y: 1200,
-  speed: 4,
+  speed: 5,
   walkTime: 0,
   facing: "right"
 };
@@ -342,5 +342,6 @@ function loop() {
 
 
 loop();
+
 
 
