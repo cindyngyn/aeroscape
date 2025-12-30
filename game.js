@@ -123,7 +123,7 @@ const CAMERA_ZOOM = 0.65;
 const player = {
   x: MAP_WIDTH / 2,
   y: MAP_HEIGHT - PLAYER_SIZE / 2 - 10,
-  speed: 5,
+  speed: 5.5,
   walkTime: 0,
   facing: "right"
 };
@@ -604,4 +604,5 @@ function loop() {
   else drawGame();
   requestAnimationFrame(loop);
 }
+
 
