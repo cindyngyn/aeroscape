@@ -26,7 +26,7 @@ const PLAYER_Y_OFFSET = 55;
 const player = {
   x: PLAYER_SIZE / 2,
   y: MAP_HEIGHT - PLAYER_SIZE * 0.45 - PLAYER_Y_OFFSET,
-  speed: 2.5,
+  speed: 3.5,
   walkTime: 0,
   facing: "right",
   img: null
@@ -304,3 +304,4 @@ function loop() {
 }
 
 loop();
+
