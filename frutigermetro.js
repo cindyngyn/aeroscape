@@ -24,7 +24,7 @@ const PLAYER_SIZE = ORIGINAL_SIZE * PLAYER_SCALE;
 const player = {
   x: PLAYER_SIZE / 2,
   y: MAP_HEIGHT - PLAYER_SIZE / 2 - 10, 
-  speed: 2.5,
+  speed: 4,
   walkTime: 0,
   facing: "right",
   img: null
@@ -272,4 +272,5 @@ function loop() {
 }
 
 loop();
+
 
